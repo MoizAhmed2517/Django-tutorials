@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Home {{ block.super }} {% endblock head_title %}
+
+{% block content %}
+    <p>{{my_content}}</p>
+
+    <p>
+        {{ request.user }} | {{ request.method }} | {{ request.user.is_authenticated }}
+    </p>
+
+    {% include 'snippets/welcome-user-message.html' %}
+
+    <br/>
+    <p>{{qs}}</p>
+
+    <br/>
+    <p>Page Visit Count: {{page_visit_count}}</p>
+
+    <br/>
+    <p>Percentage visitor visiting: {{page_visit_percentage}}</p>
+
+    <br/>
+    <p>Total visitor: {{total_visits}}</p>
+
+{% endblock %}
