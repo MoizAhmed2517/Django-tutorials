@@ -73,6 +73,9 @@ DATABASES = {
     }
 }
 
+### Self-managed postgres database configuration  --> Cloud AWS [Aurora] --> Railway [PostGres template] X --> Neon
+ 
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
