@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
     <title>{% block head_title %}| SaaS Foundation{% endblock head_title %}</title>
+    {% include 'base/css.html' %}
+
 </head>
 <body>
-    <h1>Welcome to the {{page_title}}!</h1>
+    {% include 'navbar/navbar.html' %}
     {% block content %}
     {% endblock %}
+    {% include 'base/js.html' %}
 </body>
 </html>

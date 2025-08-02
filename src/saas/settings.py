@@ -1,3 +1,5 @@
+from email.policy import default
+from re import S
 from decouple import config
 from pathlib import Path
 import dj_database_url
@@ -31,7 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'visits'
+    'visits',
+    'commando'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +78,8 @@ DATABASES = {
 }
 
 ### Self-managed postgres database configuration  --> Cloud AWS [Aurora] --> Railway [PostGres template] X --> Neon
-DATABASE_URL = config("DATABASE_URL", cast=str)
-
+DATABASE_URL = config("DATABASE_URL", cast=str, default=None)
+CONN_MAX_AGE = config("CONN_MAX_AGE", default=30, cast=int)
 if DATABASE_URL is not None:
     DATABASES = {
         "default": dj_database_url.config(
@@ -122,6 +125,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_BASE_DIR = BASE_DIR / 'staticfiles'
+STATICFILES_BASE_DIR.mkdir(exist_ok=True, parents=True)
+STATICFILES_VENDOR_DIR = STATICFILES_BASE_DIR / 'vendor'
+
+## Source for python manage.py collectstatic
+STATICFILES_DIRS = [
+    STATICFILES_BASE_DIR
+]
+
+
+## output for python manage.py collectstatic
+STATIC_ROOT = BASE_DIR / "local-cdn"
+
+## noise issues in static files --> where css and js files are note loaded correctly
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
