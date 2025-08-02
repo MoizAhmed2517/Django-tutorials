@@ -33,6 +33,19 @@ RUN pip install -r /tmp/requirements.txt
 # Copy project code
 COPY ./src/ /code/
 
+ARG DJANGO_SECRET_KEY
+ENV DJANGO_SECRET_KEY=${DJANGO_SECRET_KEY}
+
+ARG DEBUG=0
+ENV DEBUG=${DEBUG}
+
+### Adding some static file command
+#### Write some bash script to download local css and js files  ----> 
+## But this is something which beginner developer do as django expert 
+### you need to make your own python manage.py command
+RUN python manage.py vendor_pull  
+RUN python manage.py collectstatic --noinput
+
 # Set project name argument with default
 ARG PROJ_NAME="saas"
 

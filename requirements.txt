@@ -1,5 +1,6 @@
 Django>=5.1,<5.2.4
 gunicorn
 python-decouple
-psycopg2
+psycopg[binary]
 dj-database-url
+requests
