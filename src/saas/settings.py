@@ -89,7 +89,7 @@ DATABASES = {
 }
 
 ### Self-managed postgres database configuration  --> Cloud AWS [Aurora] --> Railway [PostGres template] X --> Neon
-DATABASE_URL = config("DATABASE_URL", cast=str, default=None)
+DATABASE_URL = config("DATABASE_URL", default=None)
 CONN_MAX_AGE = config("CONN_MAX_AGE", default=30, cast=int)
 if DATABASE_URL is not None:
     DATABASES = {
@@ -99,7 +99,6 @@ if DATABASE_URL is not None:
             conn_health_checks=True,
         )
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
